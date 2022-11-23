@@ -2,6 +2,7 @@ import express from 'express';
 import db from '../database/connect.js';
 import { bookValidator } from '../middleware/validate.js';
 import { auth, adminAuth } from '../middleware/auth.js';
+import { Sequelize, Op } from 'sequelize';
 
 const router = express.Router();
 router.get('/', async (req, res) => {
@@ -13,6 +14,30 @@ router.get('/', async (req, res) => {
         res.status(500).send('Įvyko vidinė serverio klaida');
     }
 });
+
+router.get('/search/:entry', async (req, res) => {
+    try {
+        console.log(req.params);
+        const books = await db.Books.findAll({
+            where: {
+                [Op.or]: {
+                    author: {
+                        [Op.substring]: req.params.entry
+                    },
+                    title: {
+                        [Op.substring]: req.params.entry
+                    }
+                }
+            }
+        });
+        res.json(books);
+    } catch (e) {
+        console.log(e);
+        res.status(500).send('Įvyko vidinė serverio klaida');
+    }
+});
+
+
 router.get('/single/:id', async (req, res) => {
     try {
         const book = await db.Books.findByPk(req.params.id);
@@ -31,7 +56,6 @@ router.post('/new', bookValidator, async (req, res) => {
         res.status(500).send('Įvyko vidinė serverio klaida');
     }
 });
-
 router.put('/edit/:id', bookValidator, async (req, res) => {
     try {
         const book = await db.Books.findByPk(req.params.id);

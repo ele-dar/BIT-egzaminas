@@ -11,6 +11,7 @@ import Register from './pages/Register';
 import NewBook from './pages/NewBook';
 import EditBook from './pages/EditBook';
 import Admin from './pages/Admin';
+import AllBooks from './pages/AllBooks';
 
 function App() {
   const [alert, setAlert] = useState({ message: '', status: '' });
@@ -34,9 +35,13 @@ function App() {
             <Route path='/' element={<Login />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+
             <Route path='/books/new' element={<NewBook />} />
             <Route path='/admin/' element={<Admin />} />
             <Route path='/admin/edit/:id' element={<EditBook />} />
+
+            <Route path='/home' element={<AllBooks />} />
+
 
             {/* Admin routes */}
             {/* {userInfo.role === '1' &&
