@@ -13,7 +13,15 @@ const Books = (sequelize) => {
         category: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        isReserved: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: 0,
+        },
+        returnDate: {
+            type: DataTypes.DATEONLY,
+        },
     };
 
     return sequelize.define('books', Schema);

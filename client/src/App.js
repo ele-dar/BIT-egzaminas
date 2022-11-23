@@ -12,6 +12,8 @@ import NewBook from './pages/NewBook';
 import EditBook from './pages/EditBook';
 import Admin from './pages/Admin';
 import AllBooks from './pages/AllBooks';
+import UserPage from './pages/UserPage';
+import UserBooks from './pages/UserBooks';
 
 function App() {
   const [alert, setAlert] = useState({ message: '', status: '' });
@@ -32,7 +34,7 @@ function App() {
         <Alert />
         <main className='container my-5 p-4' >
           <Routes>
-            <Route path='/' element={<Login />} />
+            <Route path='/' element={<AllBooks />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
 
@@ -41,6 +43,9 @@ function App() {
             <Route path='/admin/edit/:id' element={<EditBook />} />
 
             <Route path='/home' element={<AllBooks />} />
+
+            <Route path='/user/home' element={<UserPage />} />
+            <Route path='/user/books' element={<UserBooks />} />
 
 
             {/* Admin routes */}

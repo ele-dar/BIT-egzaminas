@@ -3,7 +3,6 @@ import mysql from 'mysql2/promise';
 // Modelių importas
 import Users from '../model/users.js';
 import Books from '../model/books.js';
-import Reservations from '../model/reservations.js';
 
 const database = {};
 const credentials = {
@@ -30,13 +29,11 @@ try {
     // Modelių priskyrimas su sequelize
     database.Users = Users(sequelize);
     database.Books = Books(sequelize);
-    database.Reservations = Reservations(sequelize);
 
     //Reliacijų kūrimas:
-    database.Users.hasMany(database.Reservations);
-    database.Reservations.belongsTo(database.Users);
-    database.Books.hasOne(database.Reservations);
-    database.Reservations.belongsTo(database.Books);
+    database.Users.hasMany(database.Books);
+    database.Books.belongsTo(database.Users);
+
 
     // Sequelize duomenų bazės atnaujinimas
     await sequelize.sync({ alter: true });

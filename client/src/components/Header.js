@@ -27,8 +27,7 @@ const Header = () => {
                     <img className='' src={logo} alt="Main logo" style={{ maxHeight: '5rem' }} />
                 </Link>
                 <nav className="nav ms-3 me-auto h5">
-                    {userInfo.role === '1' && <Link to='/books/new' className="nav-link text-black px-2">Pridėti naują knygą</Link>}
-                    {userInfo.role === '0' && <Link to='/entries/new' className="nav-link text-black px-2">Nauja istorija</Link>}
+                    {userInfo.role === '0' && <Link to='/user/books' className="nav-link text-black px-2">Mano knygos</Link>}
                 </nav>
                 {userInfo.id ?
                     <button className="btn btn-secondary" onClick={handleLogout}>Atsijungti</button>

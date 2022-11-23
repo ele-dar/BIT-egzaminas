@@ -54,8 +54,20 @@ export const bookValidator = (req, res, next) => {
         author: Joi.string().required(),
         title: Joi.string().required(),
         category: Joi.string().required(),
+        isReserved: Joi.bool(),
+        returnDate: Joi.date(),
+        userId: Joi.number().integer()
     });
     validate(schema, req, res, next);
 };
+
+// export const reservationValidator = (req, res, next) => {
+//     const schema = Joi.object({
+//         returnDate: Joi.date(),
+//         userId: Joi.number().integer().required(),
+//         bookId: Joi.number().integer().required(),
+//     });
+//     validate(schema, req, res, next);
+// };
 
 export default validate;

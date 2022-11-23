@@ -42,7 +42,7 @@ const Admin = () => {
         books.length > 0 ?
             <>
                 <div className='d-flex justify-content-between mb-3'>
-                    <h1 className='h3'>Visi duomenys</h1>
+                    <h1 className='h3'>Bibliotekos knygos</h1>
                     <Link to='/books/new' className='btn btn-outline-secondary'>Pridėti naują knygą</Link>
                 </div>
                 <table className="table table-hover align-middle">
@@ -52,6 +52,7 @@ const Admin = () => {
                             <th>Autorius</th>
                             <th>Pavadinimas</th>
                             <th>Kategorija</th>
+                            <th>Statusas</th>
                             <th>Veiksmai</th>
                         </tr>
                     </thead>
@@ -62,6 +63,7 @@ const Admin = () => {
                                 <td >{book.author}</td>
                                 <td >{book.title}</td>
                                 <td >{book.category}</td>
+                                <td >{book.isReserved ? `Rezervuota iki ${book.returnDate}` : "Laisva"}</td>
                                 <td className='fit'>
                                     <Link to={'/admin/edit/' + book.id} className='btn btn-outline-secondary me-3'>Redaguoti</Link>
                                     <button className='btn btn-outline-danger' onClick={() => handleDelete(book.id)}>Ištrinti</button>

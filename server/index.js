@@ -4,7 +4,7 @@ import cors from 'cors';
 // controlerių importavimas:
 import users from './controller/users.js';
 import books from './controller/books.js';
-import reservations from './controller/reservations.js';
+// import reservations from './controller/reservations.js';
 
 const app = express();
 
@@ -35,6 +35,6 @@ app.use(session({
 // Kontrolerių priskyrimas
 app.use('/api/users/', users);
 app.use('/api/books/', books);
-app.use('/api/reservations/', reservations);
+// app.use('/api/reservations/', reservations);
 
 app.listen(3000);

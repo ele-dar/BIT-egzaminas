@@ -3,7 +3,7 @@ import { useContext, useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import MainContext from '../context/MainContext';
 
-const AllBooks = () => {
+const UserBooks = () => {
     const { setAlert } = useContext(MainContext);
     const [books, setBooks] = useState([]);
     const [refresh, setRefresh] = useState(false);
@@ -49,7 +49,7 @@ const AllBooks = () => {
                 <h1 className='h3'>Bibliotekos knygos</h1>
             </div>
             <form onSubmit={handleSearch} className="mb-3">
-                <input className="form-control" type="text" name="search" placeholder='Ieškoti knygos' onChange={e => setSearchInput(e.target.value)} value={searchInput} />
+                <input className="form-control" type="text" name="search" placeholder='Ieškoti knygos' onChange={e => setSearchInput(e.target.value)} />
                 {/* <button type="submit" className='btn btn-outline-secondary'>Ieškoti</button>
                 <button type="button" className='btn btn-outline-secondary' onClick={() => { setSearchInput(''); setRefresh(!refresh); }}>Išvalyti</button> */}
             </form>
@@ -82,4 +82,4 @@ const AllBooks = () => {
     );
 };
 
-export default AllBooks;
+export default UserBooks;

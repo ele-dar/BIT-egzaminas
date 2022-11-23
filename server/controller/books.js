@@ -17,7 +17,6 @@ router.get('/', async (req, res) => {
 
 router.get('/search/:entry', async (req, res) => {
     try {
-        console.log(req.params);
         const books = await db.Books.findAll({
             where: {
                 [Op.or]: {
@@ -61,6 +60,16 @@ router.put('/edit/:id', bookValidator, async (req, res) => {
         const book = await db.Books.findByPk(req.params.id);
         await book.update(req.body);
         res.send('Knygos duomenys atnaujinti');
+    } catch (e) {
+        console.log(e);
+        res.status(500).send('Įvyko vidinė serverio klaida');
+    }
+});
+router.put('/reserve/:id', async (req, res) => {
+    try {
+        const book = await db.Books.findByPk(req.params.id);
+        await book.update(req.body);
+        res.send('Knyga sėkmingai užrezervuota');
     } catch (e) {
         console.log(e);
         res.status(500).send('Įvyko vidinė serverio klaida');
