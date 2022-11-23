@@ -63,7 +63,7 @@ const Admin = () => {
                                 <td >{book.title}</td>
                                 <td >{book.category}</td>
                                 <td className='fit'>
-                                    {/* <Link to={'/admin/edit/' + book.id} className='btn btn-outline-secondary me-3'>Redaguoti</Link> */}
+                                    <Link to={'/admin/edit/' + book.id} className='btn btn-outline-secondary me-3'>Redaguoti</Link>
                                     <button className='btn btn-outline-danger' onClick={() => handleDelete(book.id)}>Ištrinti</button>
                                 </td>
                             </tr>

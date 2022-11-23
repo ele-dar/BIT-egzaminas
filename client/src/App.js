@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import NewBook from './pages/NewBook';
+import EditBook from './pages/EditBook';
 import Admin from './pages/Admin';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path='/register' element={<Register />} />
             <Route path='/books/new' element={<NewBook />} />
             <Route path='/admin/' element={<Admin />} />
+            <Route path='/admin/edit/:id' element={<EditBook />} />
 
             {/* Admin routes */}
             {/* {userInfo.role === '1' &&
