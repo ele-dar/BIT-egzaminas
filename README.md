@@ -1,10 +1,10 @@
-# FundMe app
+# Book registry app
 Exam assignment for Javascript course in Baltic Institute of Technology
 
 ## Overview
-
-
-## Features
+- All users can view all books that are registered.
+- Registered user can view all books, reserve books, see their reserved books with expected return date. Registered user can extend the reservation period by one month.
+- User with administrator role can add, delete and update books in the registry. They can also view the list of users.
 
 
 ## Running the app
