@@ -36,6 +36,20 @@ router.get('/search/:entry', async (req, res) => {
     }
 });
 
+router.get('/user/:id', async (req, res) => {
+    try {
+        const books = await db.Books.findAll({
+            where: {
+                userId: req.params.id
+            }
+        });
+        res.json(books);
+    } catch (e) {
+        console.log(e);
+        res.status(500).send('Įvyko vidinė serverio klaida');
+    }
+});
+
 
 router.get('/single/:id', async (req, res) => {
     try {
@@ -69,7 +83,7 @@ router.put('/reserve/:id', async (req, res) => {
     try {
         const book = await db.Books.findByPk(req.params.id);
         await book.update(req.body);
-        res.send('Knyga sėkmingai užrezervuota');
+        res.send('Knygos statusas sėkmingai pakeistas');
     } catch (e) {
         console.log(e);
         res.status(500).send('Įvyko vidinė serverio klaida');

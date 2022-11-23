@@ -4,14 +4,14 @@ import { useNavigate, Link } from 'react-router-dom';
 import MainContext from '../context/MainContext';
 
 const UserBooks = () => {
-    const { setAlert } = useContext(MainContext);
+    const { setAlert, userInfo } = useContext(MainContext);
     const [books, setBooks] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [searchInput, setSearchInput] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('/api/books/')
+        axios.get('/api/books/user/' + userInfo.id)
             .then(resp => {
                 setBooks(resp.data);
             })
@@ -24,35 +24,51 @@ const UserBooks = () => {
             });
     }, [refresh]);
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        if (searchInput) {
-            axios.get('/api/books/search/' + searchInput)
-                .then(resp => {
-                    setBooks(resp.data);
-                })
-                .catch(e => {
-                    console.log(e);
-                    setAlert({
-                        message: e.response.data,
-                        status: 'danger'
-                    });
+    const handleReservation = (id, returnDate) => {
+        const date = new Date(returnDate);
+        date.setMonth(date.getMonth() + 1);
+        const options = {
+            returnDate: date,
+        };
+        axios.put('/api/books/reserve/' + id, options)
+            .then(resp => {
+                setAlert({ message: resp.data, status: 'success' });
+                setRefresh(!refresh);
+            })
+            .catch(e => {
+                console.log(e);
+                setAlert({
+                    message: e.response.data,
+                    status: 'danger'
                 });
-        } else {
-            setRefresh(!refresh);
-        }
+            });
+    };
+
+    const handleReturn = (id) => {
+        const options = {
+            isReserved: 0,
+            returnDate: null,
+            userId: null
+        };
+        axios.put('/api/books/reserve/' + id, options)
+            .then(resp => {
+                setAlert({ message: resp.data, status: 'success' });
+                setRefresh(!refresh);
+            })
+            .catch(e => {
+                console.log(e);
+                setAlert({
+                    message: e.response.data,
+                    status: 'danger'
+                });
+            });
     };
 
     return (
         <>
             <div className='d-flex justify-content-between mb-3'>
-                <h1 className='h3'>Bibliotekos knygos</h1>
+                <h1 className='h3'>Mano knygos</h1>
             </div>
-            <form onSubmit={handleSearch} className="mb-3">
-                <input className="form-control" type="text" name="search" placeholder='Ieškoti knygos' onChange={e => setSearchInput(e.target.value)} />
-                {/* <button type="submit" className='btn btn-outline-secondary'>Ieškoti</button>
-                <button type="button" className='btn btn-outline-secondary' onClick={() => { setSearchInput(''); setRefresh(!refresh); }}>Išvalyti</button> */}
-            </form>
             {books.length > 0 ?
                 <>
                     <table className="table table-hover align-middle">
@@ -61,6 +77,8 @@ const UserBooks = () => {
                                 <th>Autorius</th>
                                 <th>Pavadinimas</th>
                                 <th>Kategorija</th>
+                                <th>Rezervuota iki</th>
+                                <th>Veiksmai</th>
                             </tr>
                         </thead>
                         <tbody >
@@ -69,6 +87,11 @@ const UserBooks = () => {
                                     <td >{book.author}</td>
                                     <td >{book.title}</td>
                                     <td >{book.category}</td>
+                                    <td >{book.returnDate}</td>
+                                    <td className='fit'>
+                                        <button className='btn btn-outline-success me-1' onClick={() => handleReservation(book.id, book.returnDate)}>Pratęsti rezervaciją</button>
+                                        <button className='btn btn-outline-warning' onClick={() => handleReturn(book.id)}>Grąžinti knygą</button>
+                                    </td>
                                 </tr>
                             )}
                         </tbody>
@@ -76,7 +99,7 @@ const UserBooks = () => {
                 </>
                 :
                 <div className="mx-auto border rounded p-5">
-                    Duomenų bazėje knygų nėra
+                    Knygų nerasta
                 </div>}
         </>
     );

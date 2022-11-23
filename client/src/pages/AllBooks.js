@@ -48,35 +48,29 @@ const AllBooks = () => {
             <div className='d-flex justify-content-between mb-3'>
                 <h1 className='h3'>Bibliotekos knygos</h1>
             </div>
-            <form onSubmit={handleSearch} className="mb-3">
+            <form onSubmit={handleSearch} className="form-inline mb-3">
                 <input className="form-control" type="text" name="search" placeholder='Ieškoti knygos' onChange={e => setSearchInput(e.target.value)} value={searchInput} />
-                {/* <button type="submit" className='btn btn-outline-secondary'>Ieškoti</button>
-                <button type="button" className='btn btn-outline-secondary' onClick={() => { setSearchInput(''); setRefresh(!refresh); }}>Išvalyti</button> */}
             </form>
             {books.length > 0 ?
                 <>
-                    <table className="table table-hover align-middle">
-                        <thead>
-                            <tr>
-                                <th>Autorius</th>
-                                <th>Pavadinimas</th>
-                                <th>Kategorija</th>
-                            </tr>
-                        </thead>
-                        <tbody >
-                            {books.map(book =>
-                                <tr key={book.id}>
-                                    <td >{book.author}</td>
-                                    <td >{book.title}</td>
-                                    <td >{book.category}</td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                    <div className="row">
+                        {books.map(book =>
+                            <div className="col col-12 col-sm-6 col-md-4 col-lg-3 mb-3" key={book.id}>
+                                <div className="card h-100">
+                                    <div className="card-body d-flex flex-column">
+                                        <h5 className="card-title">{book.title}</h5>
+                                        <p className="card-text">{book.author}</p>
+                                        <p className="card-text mt-auto"><small className="text-muted">{book.category}</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                    </div>
                 </>
                 :
                 <div className="mx-auto border rounded p-5">
-                    Duomenų bazėje knygų nėra
+                    Knygų nerasta
                 </div>}
         </>
     );

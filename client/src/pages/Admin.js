@@ -45,7 +45,7 @@ const Admin = () => {
                     <h1 className='h3'>Bibliotekos knygos</h1>
                     <Link to='/books/new' className='btn btn-outline-secondary'>Pridėti naują knygą</Link>
                 </div>
-                <table className="table table-hover align-middle">
+                <table className="table table-hover align-middle table-responsive">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -75,7 +75,7 @@ const Admin = () => {
             </>
             :
             <div className="mx-auto border rounded p-5">
-                Duomenų bazėje knygų nėra
+                Knygų nerasta
             </div>
 
     );

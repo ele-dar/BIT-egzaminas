@@ -34,27 +34,29 @@ function App() {
         <Alert />
         <main className='container my-5 p-4' >
           <Routes>
+            {/* User routes */}
+            {userInfo.role === '0' &&
+              <>
+                <Route path='/' element={<UserPage />} />
+                <Route path='/user/home' element={<UserPage />} />
+                <Route path='/user/books' element={<UserBooks />} />
+              </>
+            }
+
+            {/* Admin routes */}
+            {userInfo.role === '1' &&
+              <>
+                <Route path='/books/new' element={<NewBook />} />
+                <Route path='/admin/' element={<Admin />} />
+                <Route path='/admin/edit/:id' element={<EditBook />} />
+              </>
+            }
+
             <Route path='/' element={<AllBooks />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
 
-            <Route path='/books/new' element={<NewBook />} />
-            <Route path='/admin/' element={<Admin />} />
-            <Route path='/admin/edit/:id' element={<EditBook />} />
-
-            <Route path='/home' element={<AllBooks />} />
-
-            <Route path='/user/home' element={<UserPage />} />
-            <Route path='/user/books' element={<UserBooks />} />
-
-
-            {/* Admin routes */}
-            {/* {userInfo.role === '1' &&
-              <Route path='/admin/' element={<Admin />} />} */}
-
-            {/* User routes */}
-            {/* {userInfo.role === '0' &&
-            <Route path='/user/' element={<User />} />} */}
+            {/* <Route path='/home' element={<AllBooks />} /> */}
             <Route path='/*' element={<Login />} />
           </Routes>
         </main>

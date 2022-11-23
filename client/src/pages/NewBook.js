@@ -7,10 +7,6 @@ const NewBook = () => {
     const [form, setForm] = useState({});
     const { setAlert, userInfo } = useContext(MainContext);
 
-    useEffect(() => {
-        console.log(userInfo);
-    }, []);
-
     const navigate = useNavigate();
 
     const handleForm = (e) => {

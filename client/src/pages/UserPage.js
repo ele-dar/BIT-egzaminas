@@ -55,7 +55,6 @@ const UserPage = () => {
             .then(resp => {
                 setAlert({ message: resp.data, status: 'success' });
                 setRefresh(!refresh);
-                // navigate('/user/home');
             })
             .catch(e => {
                 console.log(e);
@@ -73,38 +72,28 @@ const UserPage = () => {
             </div>
             <form onSubmit={handleSearch} className="mb-3">
                 <input className="form-control" type="text" name="search" placeholder='Ieškoti knygos' onChange={e => setSearchInput(e.target.value)} />
-                {/* <button type="submit" className='btn btn-outline-secondary'>Ieškoti</button>
-                <button type="button" className='btn btn-outline-secondary' onClick={() => { setSearchInput(''); setRefresh(!refresh); }}>Išvalyti</button> */}
             </form>
             {books.length > 0 ?
                 <>
-                    <table className="table table-hover align-middle">
-                        <thead>
-                            <tr>
-                                <th>Autorius</th>
-                                <th>Pavadinimas</th>
-                                <th>Kategorija</th>
-                                <th>Rezervuoti</th>
-                            </tr>
-                        </thead>
-                        <tbody >
-                            {books.map(book =>
-                                <tr key={book.id}>
-                                    <td >{book.author}</td>
-                                    <td >{book.title}</td>
-                                    <td >{book.category}</td>
-                                    <td className='fit'>
+                    <div className="row">
+                        {books.map(book =>
+                            <div className="col col-12 col-sm-6 col-md-4 col-lg-3 mb-3" key={book.id}>
+                                <div className="card h-100">
+                                    <div className="card-body d-flex flex-column">
+                                        <h5 className="card-title">{book.title}</h5>
+                                        <p className="card-text">{book.author}</p>
+                                        <p className="card-text mt-auto"><small className="text-muted">{book.category}</small></p>
                                         <button className='btn btn-outline-danger' onClick={() => handleReservation(book.id)} disabled={book.isReserved}>Rezervuoti</button>
-                                    </td>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                    </div>
                 </>
                 :
                 <div className="mx-auto border rounded p-2">
-                    Duomenų bazėje knygų nėra
+                    Knygų nerasta
                 </div>}
         </>
     );
