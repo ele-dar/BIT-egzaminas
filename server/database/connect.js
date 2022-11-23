@@ -36,7 +36,7 @@ try {
 
 
     // Sequelize duomenų bazės atnaujinimas
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ alter: false });
 
 } catch (e) {
     console.log(e);

@@ -21,6 +21,15 @@ const validate = (schema, req, res, next) => {
             case 'password':
                 message = 'Slaptažodis turi būti 6-12 simbolių ilgio';
                 break;
+            case 'author':
+                message = 'Būtina įvesti knygos autorių';
+                break;
+            case 'title':
+                message = 'Būtina įvesti knygos pavadinimą';
+                break;
+            case 'category':
+                message = 'Būtina pasirinkti knygos kategoriją';
+                break;
             default:
                 message = 'Neteisingai užpildyti laukeliai';
         }
@@ -55,19 +64,10 @@ export const bookValidator = (req, res, next) => {
         title: Joi.string().required(),
         category: Joi.string().required(),
         isReserved: Joi.bool(),
-        returnDate: Joi.date(),
-        userId: Joi.number().integer()
+        returnDate: Joi.date().allow(null),
+        userId: Joi.number().integer().allow(null)
     });
     validate(schema, req, res, next);
 };
-
-// export const reservationValidator = (req, res, next) => {
-//     const schema = Joi.object({
-//         returnDate: Joi.date(),
-//         userId: Joi.number().integer().required(),
-//         bookId: Joi.number().integer().required(),
-//     });
-//     validate(schema, req, res, next);
-// };
 
 export default validate;

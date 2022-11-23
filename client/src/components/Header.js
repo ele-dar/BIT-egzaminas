@@ -31,7 +31,10 @@ const Header = () => {
                     {userInfo.role === '1' && <Link to='/admin' className="nav-link text-black px-2">Administracinė sritis</Link>}
                 </nav>
                 {userInfo.id ?
-                    <button className="btn btn-secondary" onClick={handleLogout}>Atsijungti</button>
+                    <>
+                        <div className='me-3'>Sveiki, {userInfo.first_name}</div>
+                        <button className="btn btn-secondary" onClick={handleLogout}>Atsijungti</button>
+                    </>
                     : (
                         <>
                             <Link to='/login' type="button" className="btn btn-outline-secondary me-2">Prisijungti</Link>

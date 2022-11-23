@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, Link, useParams } from 'react-router-dom';
 import MainContext from '../context/MainContext';
+import { BOOK_CATEGORIES } from '../data/categories';
 
 const EditBook = () => {
     const { id } = useParams();
@@ -58,7 +59,13 @@ const EditBook = () => {
                     </div>
                     <div className="mt-3">
                         <label className="form-label">Kategorija:</label>
-                        <input className="form-control" type="text" name="category" onChange={(e) => handleForm(e)} value={form.category} />
+                        <select className="form-select mb-3" name="category" onChange={(e) => setForm({ ...form, category: e.target.value })} value={form.category} >
+                            <option value='' defaultValue className='text-secondary'>Pasirinkti kategoriją</option>
+                            {BOOK_CATEGORIES.map((category, index) =>
+                                <option value={category} key={index}>{category}</option>
+                            )}
+                        </select>
+                        {/* <input className="form-control" type="text" name="category" onChange={(e) => handleForm(e)} value={form.category} /> */}
                     </div>
                     <div className='mt-4 d-flex justify-content-between'>
                         <button className="btn btn-secondary">Išsaugoti</button>

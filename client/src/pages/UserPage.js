@@ -112,7 +112,11 @@ const UserPage = () => {
                                         <h5 className="card-title">{book.title}</h5>
                                         <p className="card-text">{book.author}</p>
                                         <p className="card-text mt-auto"><small className="text-muted">{book.category}</small></p>
-                                        <button className='btn btn-outline-danger' onClick={() => handleReservation(book.id)} disabled={book.isReserved}>Rezervuoti</button>
+                                        {book.isReserved ?
+                                            <button className='btn btn-outline-danger' onClick={() => handleReservation(book.id)} disabled>Knyga rezervuota</button>
+                                            :
+                                            <button className='btn btn-outline-success' onClick={() => handleReservation(book.id)}>Rezervuoti</button>
+                                        }
                                     </div>
                                 </div>
                             </div>
