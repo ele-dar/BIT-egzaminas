@@ -28,7 +28,12 @@ const Header = () => {
                 </Link>
                 <nav className="nav ms-3 me-auto h5">
                     {userInfo.role === '0' && <Link to='/user/books' className="nav-link text-black px-2">Mano knygos</Link>}
-                    {userInfo.role === '1' && <Link to='/admin' className="nav-link text-black px-2">Administracinė sritis</Link>}
+                    {userInfo.role === '1' && (
+                        <>
+                            <Link to='/admin' className="nav-link text-black px-2">Valdyti knygas</Link>
+                            <Link to='/admin/users' className="nav-link text-black px-2">Vartotojai</Link>
+                        </>
+                    )}
                 </nav>
                 {userInfo.id ?
                     <>

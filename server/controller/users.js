@@ -5,6 +5,16 @@ import { userValidator, loginValidator } from "../middleware/validate.js";
 
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+    try {
+        const users = await db.Users.findAll();
+        res.json(users);
+    } catch (e) {
+        console.log(e);
+        res.status(500).send('Įvyko vidinė serverio klaida');
+    }
+});
+
 router.post('/register', userValidator, async (req, res) => {
     try {
         const userExists = await db.Users.findOne({ where: { email: req.body.email } });

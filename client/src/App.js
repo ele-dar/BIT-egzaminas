@@ -14,6 +14,7 @@ import Admin from './pages/Admin';
 import AllBooks from './pages/AllBooks';
 import UserPage from './pages/UserPage';
 import UserBooks from './pages/UserBooks';
+import AllUsers from './pages/AllUsers';
 
 function App() {
   const [alert, setAlert] = useState({ message: '', status: '' });
@@ -49,6 +50,7 @@ function App() {
                 <Route path='/books/new' element={<NewBook />} />
                 <Route path='/admin/' element={<Admin />} />
                 <Route path='/admin/edit/:id' element={<EditBook />} />
+                <Route path='/admin/users' element={<AllUsers />} />
               </>
             }
 
