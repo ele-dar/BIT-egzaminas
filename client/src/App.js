@@ -8,6 +8,8 @@ import Header from './components/Header';
 
 import Login from './pages/Login';
 import Register from './pages/Register';
+import NewBook from './pages/NewBook';
+import Admin from './pages/Admin';
 
 function App() {
   const [alert, setAlert] = useState({ message: '', status: '' });
@@ -31,10 +33,13 @@ function App() {
             <Route path='/' element={<Login />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/books/new' element={<NewBook />} />
+            <Route path='/admin/' element={<Admin />} />
 
             {/* Admin routes */}
             {/* {userInfo.role === '1' &&
-            <Route path='/admin/' element={<Admin />} /> }*/}
+              <Route path='/admin/' element={<Admin />} />} */}
+
             {/* User routes */}
             {/* {userInfo.role === '0' &&
             <Route path='/user/' element={<User />} />} */}

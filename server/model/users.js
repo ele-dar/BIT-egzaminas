@@ -1,4 +1,4 @@
-import { DataTypes } from 'sequelize'
+import { DataTypes } from 'sequelize';
 
 const Users = (sequelize) => {
     const Schema = {
@@ -23,9 +23,9 @@ const Users = (sequelize) => {
             allowNull: false,
             defaultValue: 0
         }
-    }
+    };
 
-    return sequelize.define('users', Schema)
-}
+    return sequelize.define('users', Schema);
+};
 
-export default Users
+export default Users;

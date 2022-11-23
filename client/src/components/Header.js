@@ -1,24 +1,24 @@
-import { useContext } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import MainContext from '../context/MainContext'
-import logo from '../images/logo.png'
+import { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import MainContext from '../context/MainContext';
+import logo from '../images/logo.png';
 
 const Header = () => {
-    const { setAlert, userInfo, setUserInfo } = useContext(MainContext)
-    const navigate = useNavigate()
+    const { setAlert, userInfo, setUserInfo } = useContext(MainContext);
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         axios.get('/api/users/logout')
             .then(resp => {
-                setUserInfo({})
-                setAlert({ message: resp.data, status: 'success' })
-                navigate('/')
+                setUserInfo({});
+                setAlert({ message: resp.data, status: 'success' });
+                navigate('/');
             })
             .catch(e => {
-                setAlert({ message: e.response.data, status: 'danger' })
-            })
-    }
+                setAlert({ message: e.response.data, status: 'danger' });
+            });
+    };
 
     return (
         <header className="p-3 px-5  border-bottom bg-light">
@@ -27,8 +27,8 @@ const Header = () => {
                     <img className='' src={logo} alt="Main logo" style={{ maxHeight: '5rem' }} />
                 </Link>
                 <nav className="nav ms-3 me-auto h5">
-                    {userInfo.role === '1' && <Link to='/admin/' className="nav-link text-black px-2">Admino nuoroda</Link>}
-                    {userInfo.role === '0' && <Link to='/user/' className="nav-link text-black px-2">Vartotojo nuoroda</Link>}
+                    {userInfo.role === '1' && <Link to='/books/new' className="nav-link text-black px-2">Pridėti naują knygą</Link>}
+                    {userInfo.role === '0' && <Link to='/entries/new' className="nav-link text-black px-2">Nauja istorija</Link>}
                 </nav>
                 {userInfo.id ?
                     <button className="btn btn-secondary" onClick={handleLogout}>Atsijungti</button>
@@ -41,7 +41,7 @@ const Header = () => {
                 }
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;
